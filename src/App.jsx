@@ -1,8 +1,21 @@
+import { Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Layout from "./components/Layout";
+import { ReactQueryDevtools } from "react-query/devtools";
+
 function App() {
   return (
-    <div className="text-blue-500">
-      Hello world
-    </div>
+    <>
+      <ReactQueryDevtools />
+      <Routes>
+        <Route index element={<Layout />} />
+        <Route path="auth">
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
