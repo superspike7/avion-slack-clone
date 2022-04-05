@@ -9,8 +9,8 @@ const URL = "http://206.189.91.54/api/v1";
 function ErrorMessage({ errors }) {
   return (
     <div>
-      {errors.map((error) => {
-        return <li>{error}</li>;
+      {errors.map((error, idx) => {
+        return <li key={idx}>{error}</li>;
       })}
     </div>
   );
@@ -98,7 +98,7 @@ export default function ChannelForm() {
         {isSuccess && !mutationData.errors
           ? <div>Channel Successfully Created!</div>
           : null}
-        {mutationData.errors
+        {mutationData?.errors
           ? <ErrorMessage errors={mutationData.errors} />
           : null}
         <h1 className="text-center text-2xl font-bold ">
