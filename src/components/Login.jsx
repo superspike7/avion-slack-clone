@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { getStoredUser, setStoredUser } from "../storage/user";
+import { setStoredUser } from "../storage/user";
 
 const URL = "http://206.189.91.54/api/v1";
 
