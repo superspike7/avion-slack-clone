@@ -3,14 +3,6 @@ import { getStoredUser } from "./storage/user";
 
 const URL = "http://206.189.91.54/api/v1";
 
-export const fetchChannels = async () => {
-  response = await axios.get(`${URL}/channels`, {
-    headers: getStoredUser().headers,
-  });
-  console.log("channels", response);
-  return response.data;
-};
-
 export const registerUser = async (newUser) => {
   return await axios
     .post(`${URL}/auth/`, newUser)
@@ -19,4 +11,14 @@ export const registerUser = async (newUser) => {
 
 export const loginUser = async (user) => {
   return await axios.post(`${URL}/auth/sign_in`, user);
+};
+
+export const fetchChannels = async () => {
+  return await axios
+    .get(`${URL}/channels`, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => {
+      return response.data;
+    });
 };

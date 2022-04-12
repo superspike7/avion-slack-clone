@@ -1,18 +1,8 @@
-import axios from "axios";
-import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { getStoredUser } from "../storage/user";
-
-const URL = "http://206.189.91.54/api/v1";
+import useChannels from "../hooks/useChannels";
 
 export default function Nav() {
-  const { data: channels } = useQuery("channels", async () => {
-    const response = await axios.get(`${URL}/channels`, {
-      headers: getStoredUser().headers,
-    });
-    console.log("channels", response);
-    return response.data;
-  });
+  const { data: channels } = useChannels();
 
   return (
     <div className="bg-primary p-2">
@@ -31,6 +21,7 @@ export default function Nav() {
           </Link>
         </div>
         <ul className="w-10/12 mx-auto">
+          {!!channels?.errors ? <p>{channels?.errors}</p> : null}
           {channels?.data?.map((channel) => {
             return (
               <Link
