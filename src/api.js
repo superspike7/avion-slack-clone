@@ -16,3 +16,7 @@ export const registerUser = async (newUser) => {
     .post(`${URL}/auth/`, newUser)
     .then((response) => response.data);
 };
+
+export const loginUser = async (user) => {
+  return await axios.post(`${URL}/auth/sign_in`, user);
+};
