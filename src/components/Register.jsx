@@ -1,15 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
-import { useMutation } from "react-query";
-
-const URL = "http://206.189.91.54/api/v1";
+import useCreateUser from "../hooks/useCreateUser";
+import ErrorMessage from "./ErrorMessage";
 
 export default function Register() {
-  const { isLoading, isError, mutate, data, error, isSuccess } = useMutation(
-    (newUser) => {
-      return axios.post(`${URL}/auth/`, newUser);
-    },
-  );
+  const { error, isError, isSuccess, isLoading, mutate } = useCreateUser();
 
   const [values, setValues] = useState({
     email: "",
@@ -28,15 +22,20 @@ export default function Register() {
   function handleSubmit(e) {
     e.preventDefault();
     mutate(values);
-    console.log("data", data);
   }
 
   if (isLoading) return <h1>Registering User...</h1>;
 
   return (
     <div className="container h-screen mx-auto">
-      {isError ? <div>error! {error.message}</div> : null}
       {isSuccess ? <div>User is now Registered!</div> : null}
+      {isError
+        ? (
+          <ErrorMessage
+            errors={error.response.data.errors.full_messages}
+          />
+        )
+        : null}
       <form className="my-10 mx-auto w-1/4" onSubmit={handleSubmit}>
         <h1 className="text-4xl font-bold text-center mb-16">Register</h1>
 
