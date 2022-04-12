@@ -1,6 +1,19 @@
+import axios from "axios";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { getStoredUser } from "../storage/user";
+
+const URL = "http://206.189.91.54/api/v1";
 
 export default function Nav() {
+  const { data: channels } = useQuery("channels", async () => {
+    const response = await axios.get(`${URL}/channels`, {
+      headers: getStoredUser().headers,
+    });
+    console.log("channels", response);
+    return response.data;
+  });
+
   return (
     <div className="bg-primary p-2">
       <h1 className="text-center text-gray-50 text-xl font-semibold mb-8
@@ -18,12 +31,17 @@ export default function Nav() {
           </Link>
         </div>
         <ul className="w-10/12 mx-auto">
-          <Link
-            to="/channels/69"
-            className="hover:bg-gray-800 cursor-pointer w-full block"
-          >
-            Batch 17
-          </Link>
+          {channels?.data.map((channel) => {
+            return (
+              <Link
+                key={channel.id}
+                className="hover:bg-gray-800 cursor-pointer w-full block"
+                to={`/channels/${channel.id}`}
+              >
+                {channel.name}
+              </Link>
+            );
+          })}
         </ul>
       </div>
       <div className="px-4 text-gray-50">
