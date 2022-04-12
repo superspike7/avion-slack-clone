@@ -1,20 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
-import { useMutation } from "react-query";
-import { setStoredUser } from "../storage/user";
-
-const URL = "http://206.189.91.54/api/v1";
+import useLoginUser from "../hooks/useLoginUser";
+import ErrorMessage from "./ErrorMessage";
 
 export default function Login() {
-  const { isLoading, isError, mutate, error, isSuccess } = useMutation(
-    async (user) => {
-      const response = await axios.post(`${URL}/auth/sign_in`, user);
-      const userData = { ...response.data, headers: response.headers };
-      console.log("response", userData);
-      setStoredUser(userData);
-      return response;
-    },
-  );
+  const { isLoading, isError, mutate, error, isSuccess } = useLoginUser();
 
   const [values, setValues] = useState({
     email: "",
@@ -39,7 +28,7 @@ export default function Login() {
   return (
     <div className="container h-screen mx-auto">
       <form className="my-10 mx-auto w-1/4" onSubmit={handleSubmit}>
-        {isError ? <div>error! {error.message}</div> : null}
+        {isError ? <ErrorMessage errors={error.response.data.errors} /> : null}
         {isSuccess ? <div>User is now Logged In!</div> : null}
         <h1 className="text-4xl font-bold text-center mb-16">Login</h1>
 
