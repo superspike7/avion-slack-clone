@@ -22,3 +22,21 @@ export const fetchChannels = async () => {
       return response.data;
     });
 };
+
+export const createChannel = async (newChannel) => {
+  return await axios
+    .post(`${URL}/channels`, newChannel, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => response.data);
+};
+
+export const fetchUsers = async () => {
+  return await axios
+    .get(`${URL}/users`, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => {
+      return response.data.data;
+    });
+};

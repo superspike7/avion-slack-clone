@@ -1,26 +1,16 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
-import { getStoredUser } from "../storage/user";
 import Select, { createFilter } from "react-select";
-
-const URL = "http://206.189.91.54/api/v1";
-
-function ErrorMessage({ errors }) {
-  return (
-    <div>
-      {errors.map((error, idx) => {
-        return <li key={idx}>{error}</li>;
-      })}
-    </div>
-  );
-}
+import ErrorMessage from "./ErrorMessage";
+import useCreateChannel from "../hooks/useCreateChannel";
+import useUsers from "../hooks/useUsers";
+import { getStoredUser } from "../storage/user";
 
 export default function ChannelForm() {
   const currentUser = getStoredUser();
-  const [users, setUsers] = useState([]);
   const [userIds, setUserIds] = useState([currentUser.data.id]);
   const [title, setTitle] = useState("");
+
+  const { users } = useUsers();
 
   const {
     isLoading,
@@ -29,28 +19,7 @@ export default function ChannelForm() {
     isError,
     error,
     data: mutationData,
-  } = useMutation(
-    async (newChannel) => {
-      const response = await axios.post(`${URL}/channels`, newChannel, {
-        headers: currentUser.headers,
-      });
-      console.log(response);
-      return response.data;
-    },
-  );
-
-  const { data: fetchedUsers } = useQuery(`users`, async () => {
-    const { data } = await axios.get(`${URL}/users`, {
-      headers: currentUser.headers,
-    });
-    return data.data;
-  });
-
-  useEffect(() => {
-    if (fetchedUsers) {
-      setUsers(fetchedUsers);
-    }
-  }, [fetchedUsers]);
+  } = useCreateChannel();
 
   const selectedUsers = users.filter((user) => {
     return userIds.includes(user.id);
@@ -68,7 +37,6 @@ export default function ChannelForm() {
       ...userIds,
       opt.value,
     ]);
-    console.log(selectedUsers);
   };
 
   const handleCancel = (id) => {
