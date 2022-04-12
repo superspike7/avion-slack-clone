@@ -12,5 +12,12 @@ export default function useChannels() {
     }
   }, [data]);
 
-  return { users };
+  const userOptions = users.map((user) => {
+    return {
+      value: user.id,
+      label: user.email,
+    };
+  });
+
+  return { users, userOptions };
 }
