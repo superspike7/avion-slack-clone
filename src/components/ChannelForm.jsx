@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Select, { createFilter } from "react-select";
 import ErrorMessage from "./ErrorMessage";
 import useCreateChannel from "../hooks/useCreateChannel";
@@ -10,7 +10,7 @@ export default function ChannelForm() {
   const [userIds, setUserIds] = useState([currentUser.data.id]);
   const [title, setTitle] = useState("");
 
-  const { users } = useUsers();
+  const { users, userOptions } = useUsers();
 
   const {
     isLoading,
@@ -23,13 +23,6 @@ export default function ChannelForm() {
 
   const selectedUsers = users.filter((user) => {
     return userIds.includes(user.id);
-  });
-
-  const userOptions = users.map((user) => {
-    return {
-      value: user.id,
-      label: user.email,
-    };
   });
 
   const handleSelect = (opt) => {

@@ -40,3 +40,37 @@ export const fetchUsers = async () => {
       return response.data.data;
     });
 };
+
+export const fetchMessages = async (id, type) => {
+  return await axios
+    .get(`${URL}/messages?receiver_id=${id}&receiver_class=${type}`, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log("message", err);
+    });
+};
+
+export const createMessage = async (message) => {
+  return await axios
+    .post(`${URL}/messages`, message, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => response.data);
+};
+
+export const fetchChannelDetails = async (id) => {
+  return await axios
+    .get(`${URL}/channels/${id}`, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log("message", err);
+    });
+};
