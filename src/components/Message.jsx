@@ -1,13 +1,7 @@
-export default function Message({ message }) {
-  const formatTime = (time) => {
-    const date = new Date(time);
-    return date.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-  };
+import { Link } from "react-router-dom";
+import formatTime from "../helper/formatTime";
 
+export default function Message({ message }) {
   const AVATAR = "https://avatars.dicebear.com/api/micah/";
 
   return (
@@ -18,7 +12,9 @@ export default function Message({ message }) {
         </div>
         <div className="flex flex-col flex-1">
           <div className="flex gap-2 items-end">
-            <p>{message.sender.email}</p>
+            <Link to={`/dm/${message.sender.id}`} className="font-bold">
+              {message.sender.email}
+            </Link>
             <span className="text-sm">{formatTime(message.created_at)}</span>
           </div>
           <p>
