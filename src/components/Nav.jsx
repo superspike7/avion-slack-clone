@@ -46,7 +46,7 @@ export default function Nav() {
             to="/messages/new"
             className="hover:bg-gray-100 hover:text-gray-900 px-2 rounded-full"
           >
-            +
+            &#x1F50D;
           </Link>
         </div>
         <ul className="w-10/12 mx-auto">
