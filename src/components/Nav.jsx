@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 import useChannels from "../hooks/useChannels";
-import useMessages from "../hooks/useMessages";
-import { getStoredUser } from "../storage/user";
 
 export default function Nav() {
-  const id = getStoredUser().data.id;
   const { data: channels } = useChannels();
-  const { messages } = useMessages(1838, "User");
 
   return (
     <div className="bg-primary p-2">
