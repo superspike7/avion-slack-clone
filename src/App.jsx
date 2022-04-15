@@ -4,6 +4,7 @@ import Register from "./components/Register";
 import Layout from "./components/Layout";
 import ChannelForm from "./components/ChannelForm";
 import ChannelMessage from "./components/ChannelMessage";
+import ChannelInvite from "./components/ChannelInvite";
 import DirectMessage from "./components/DirectMessage";
 import Dashboard from "./components/Dashboard";
 import MessageForm from "./components/MessageForm";
@@ -19,6 +20,7 @@ function App() {
           <Route path="channels/new" element={<ChannelForm />} />
           <Route path="messages/new" element={<MessageForm />} />
           <Route path="channels/:id" element={<ChannelMessage />} />
+          <Route path="channels/:id/invite" element={<ChannelInvite />} />
           <Route path="dm/:id" element={<DirectMessage />} />
         </Route>
         <Route path="auth">

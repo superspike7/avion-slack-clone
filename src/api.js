@@ -74,3 +74,13 @@ export const fetchChannelDetails = async (id) => {
       console.log("message", err);
     });
 };
+
+export const inviteUser = async (body) => {
+  return await axios
+    .post(`${URL}/channel/add_member`, body, {
+      headers: getStoredUser().headers,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
