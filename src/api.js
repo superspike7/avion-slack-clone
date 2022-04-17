@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getStoredUser } from "./storage/user";
 
-const URL = "http://206.189.91.54/api/v1";
+const URL = import.meta.env.VITE_APP_URL;
 
 export const registerUser = async (newUser) => {
   return await axios
