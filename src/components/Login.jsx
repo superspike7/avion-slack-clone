@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useLoginUser from "../hooks/useLoginUser";
 import ErrorMessage from "./ErrorMessage";
 
 export default function Login() {
   const { isLoading, isError, mutate, error, isSuccess } = useLoginUser();
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     email: "",
@@ -20,9 +22,12 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    mutate(values);
+    mutate(values, {
+      onSuccess: () => {
+        return navigate("/");
+      },
+    });
   }
-
   if (isLoading) return <h1>Logging in User...</h1>;
 
   return (
@@ -61,6 +66,13 @@ export default function Login() {
         >
           Login
         </button>
+        <p className="text-center my-2">Or</p>
+        <Link
+          to="/auth/register"
+          className="block text-center w-full text-gray-50 p-2 bg-fuchsia-900 font-bold text-lg rounded-md"
+        >
+          Register Here
+        </Link>
       </form>
     </div>
   );
