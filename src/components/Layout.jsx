@@ -11,7 +11,7 @@ export default function Layout() {
     if (!user) {
       return navigate("auth/login");
     }
-  }, user);
+  }, [user]);
 
   return (
     <div className="h-screen w-screen bg-gray-50 grid grid-cols-[280px_1fr]">
