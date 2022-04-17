@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useCreateUser from "../hooks/useCreateUser";
 import ErrorMessage from "./ErrorMessage";
 
@@ -81,6 +82,13 @@ export default function Register() {
         >
           Sign Up
         </button>
+        <p className="text-center my-2">Or</p>
+        <Link
+          to="/auth/login"
+          className="block text-center w-full text-gray-50 p-2 bg-fuchsia-900 font-bold text-lg rounded-md"
+        >
+          Login Here
+        </Link>
       </form>
     </div>
   );
