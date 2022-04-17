@@ -4,8 +4,10 @@ import ErrorMessage from "./ErrorMessage";
 import useCreateChannel from "../hooks/useCreateChannel";
 import useUsers from "../hooks/useUsers";
 import { getStoredUser } from "../storage/user";
+import { useNavigate } from "react-router-dom";
 
 export default function ChannelForm() {
+  const navigate = useNavigate();
   const currentUser = getStoredUser();
   const [userIds, setUserIds] = useState([currentUser.data.id]);
   const [title, setTitle] = useState("");
@@ -44,7 +46,11 @@ export default function ChannelForm() {
       name: title,
       user_ids: userIds,
     };
-    mutate(data);
+    mutate(data, {
+      onSuccess: ({ data }) => {
+        return navigate(`/channels/${data.id}`);
+      },
+    });
   };
 
   if (isLoading) return <h1>Loading...</h1>;

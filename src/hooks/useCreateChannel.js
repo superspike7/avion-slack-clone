@@ -1,6 +1,11 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import * as API from "../api";
 
 export default function useCreateChannel() {
-  return useMutation(API.createChannel);
+  const queryClient = useQueryClient();
+  return useMutation(API.createChannel, {
+    onSettled: () => {
+      queryClient.invalidateQueries("channels");
+    },
+  });
 }
