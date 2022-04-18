@@ -61,13 +61,8 @@ export default function ChannelForm() {
         className="w-5/12 rounded-lg shadow-xl p-4 bg-gray-100"
         onSubmit={handleSubmit}
       >
-        {isError ? <div>Error: {error.message}</div> : null}
-        {isSuccess && !mutationData.errors
-          ? <div>Channel Successfully Created!</div>
-          : null}
-        {mutationData?.errors
-          ? <ErrorMessage errors={mutationData.errors} />
-          : null}
+        {isSuccess ? <div>Channel Successfully Created!</div> : null}
+        {isError ? <ErrorMessage errors={error} /> : null}
         <h1 className="text-center text-2xl font-bold ">
           Create New Channel
         </h1>
