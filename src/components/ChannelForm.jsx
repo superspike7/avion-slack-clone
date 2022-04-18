@@ -20,7 +20,6 @@ export default function ChannelForm() {
     isSuccess,
     isError,
     error,
-    data: mutationData,
   } = useCreateChannel();
 
   const selectedUsers = users.filter((user) => {
@@ -61,11 +60,11 @@ export default function ChannelForm() {
         className="w-5/12 rounded-lg shadow-xl p-4 bg-gray-100"
         onSubmit={handleSubmit}
       >
-        {isSuccess ? <div>Channel Successfully Created!</div> : null}
-        {isError ? <ErrorMessage errors={error} /> : null}
         <h1 className="text-center text-2xl font-bold ">
           Create New Channel
         </h1>
+        {isSuccess ? <div>Channel Successfully Created!</div> : null}
+        {isError ? <ErrorMessage errors={error} /> : null}
 
         <div className="flex flex-col h-full py-2 gap-2">
           <div className="flex flex-col">

@@ -28,17 +28,17 @@ export default function Register() {
   if (isLoading) return <h1>Registering User...</h1>;
 
   return (
-    <div className="container h-screen mx-auto">
-      {isSuccess ? <div>User is now Registered!</div> : null}
-      {isError
-        ? (
-          <ErrorMessage
-            errors={error.response.data.errors.full_messages}
-          />
-        )
-        : null}
-      <form className="my-10 mx-auto w-1/4" onSubmit={handleSubmit}>
-        <h1 className="text-4xl font-bold text-center mb-16">Register</h1>
+    <div className="container h-screen mx-auto grid place-items-center">
+      <form className="my-10 mx-auto sm:w-1/4" onSubmit={handleSubmit}>
+        <h1 className="text-4xl font-bold text-center ">Register</h1>
+        {isSuccess ? <div>User is now Registered!</div> : null}
+        {isError
+          ? (
+            <ErrorMessage
+              errors={error.response.data.errors.full_messages}
+            />
+          )
+          : null}
 
         <div className="flex flex-col">
           <label htmlFor="email" className="text-lg">Email:</label>
