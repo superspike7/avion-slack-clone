@@ -28,7 +28,10 @@ export const createChannel = async (newChannel) => {
     .post(`${URL}/channels`, newChannel, {
       headers: getStoredUser().headers,
     })
-    .then((response) => response.data);
+    .then((response) => {
+      if (response.data.errors) throw response.data.errors;
+      return response.data;
+    });
 };
 
 export const fetchUsers = async () => {

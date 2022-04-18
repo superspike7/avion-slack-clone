@@ -10,8 +10,5 @@ export default function useLoginUser() {
         headers: data.headers,
       });
     },
-    onError: (error) => {
-      console.log(error.response);
-    },
   });
 }
