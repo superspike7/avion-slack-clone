@@ -31,11 +31,11 @@ export default function Login() {
   if (isLoading) return <h1>Logging in User...</h1>;
 
   return (
-    <div className="container h-screen mx-auto">
-      <form className="my-10 mx-auto w-1/4" onSubmit={handleSubmit}>
+    <div className="container h-screen mx-auto grid place-items-center">
+      <form className="my-10 mx-auto sm:w-1/4" onSubmit={handleSubmit}>
+        <h1 className="text-4xl font-bold text-center">Login</h1>
         {isError ? <ErrorMessage errors={error.response.data.errors} /> : null}
         {isSuccess ? <div>User is now Logged In!</div> : null}
-        <h1 className="text-4xl font-bold text-center mb-16">Login</h1>
 
         <div className="flex flex-col">
           <label htmlFor="email" className="text-lg">Email:</label>
