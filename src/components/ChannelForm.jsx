@@ -48,7 +48,7 @@ export default function ChannelForm() {
     };
     mutate(data, {
       onSuccess: ({ data }) => {
-        return navigate(`/channels/${data.id}`);
+        if (data) return navigate(`/channels/${data.id}`);
       },
     });
   };
@@ -58,10 +58,10 @@ export default function ChannelForm() {
   return (
     <div className="w-full h-full grid place-items-center mx-auto">
       <form
-        className="h-2/3 w-5/12 rounded-md shadow-xl p-2 bg-gray-100"
+        className="w-5/12 rounded-lg shadow-xl p-4 bg-gray-100"
         onSubmit={handleSubmit}
       >
-        {isError ? <div>error! {error.message}</div> : null}
+        {isError ? <div>Error: {error.message}</div> : null}
         {isSuccess && !mutationData.errors
           ? <div>Channel Successfully Created!</div>
           : null}
@@ -96,11 +96,11 @@ export default function ChannelForm() {
 
           <div className="flex-1">
             <h3 className="text-lg">Users:</h3>
-            <ul className="list-decimal p-2 flex flex-col gap-1">
+            <ul className="list-decimal p-2 flex flex-col gap-1 h-56 overflow-auto">
               {selectedUsers.map((user) => {
                 return (
                   <li
-                    className="flex justify-between rounded-md bg-purple-500 px-2 text-gray-50 text-lg"
+                    className="flex justify-between rounded-md bg-fuchsia-900 px-2 text-gray-50 text-lg"
                     key={user.id}
                   >
                     <p>{user.email}</p>

@@ -3,7 +3,7 @@ import MessageForm from "./MessageForm";
 
 export default function Dashboard() {
   return (
-    <div>
+    <div className="">
       <h1 className="text-center my-2 text-xl">Start a Conversation</h1>
       <MessageForm />
       <h1 className="text-center my-2 text-xl">Or Create a Channel</h1>
