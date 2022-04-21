@@ -1,11 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import useChannels from "../hooks/useChannels";
 
-export default function Nav() {
+export default function Nav({ showNav }) {
   const { data: channels } = useChannels();
 
   return (
-    <div className="bg-primary">
+    <div
+      className={`bg-primary sm:static transition-all ease-in-out duration-150 z-10 fixed top-0 left-0 h-screen w-64 sm:translate-x-0 ${
+        showNav ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       <Link
         to="/"
         className="text-center text-gray-50 text-xl font-semibold mb-8 block
@@ -31,13 +35,14 @@ export default function Nav() {
                 key={channel.id}
                 className={({ isActive }) =>
                   [
-                    "py-1 w-full block",
+                    "py-1 w-full block font-semibold",
                     isActive
                       ? "bg-sky-700 hover:bg-sky-700 cursor-default"
                       : "hover:bg-gray-900/50 cursor-pointer",
                   ].filter(Boolean).join(" ")}
                 to={`/channels/${channel.id}`}
               >
+                <span className="mr-3">#</span>
                 {channel.name}
               </NavLink>
             );
