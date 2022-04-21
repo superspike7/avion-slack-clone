@@ -57,7 +57,7 @@ export default function ChannelForm() {
   return (
     <div className="w-full h-full grid place-items-center mx-auto">
       <form
-        className="w-5/12 rounded-lg shadow-xl p-4 bg-gray-100"
+        className="sm:w-5/12 rounded-lg shadow-xl p-4 bg-gray-100"
         onSubmit={handleSubmit}
       >
         <h1 className="text-center text-2xl font-bold ">

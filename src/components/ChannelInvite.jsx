@@ -41,10 +41,13 @@ export default function ChannelInvite() {
         onChange={(opt) => handleSelect(opt)}
         filterOption={createFilter({ ignoreAccents: false })}
       />
-      <div>
+      <div className="px-5">
         <p>selected: {selected.label}</p>
       </div>
-      <button onClick={handleInvite} className="bg-green-500 p-2 rounded-md">
+      <button
+        onClick={handleInvite}
+        className="bg-green-500 p-2 rounded-md ml-4 mt-2"
+      >
         Invite user
       </button>
 
