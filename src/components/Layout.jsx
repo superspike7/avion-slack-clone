@@ -23,7 +23,7 @@ export default function Layout() {
   return (
     <div className="h-screen w-screen bg-gray-50 flex">
       <Nav showNav={showMobileNav} />
-      <div className="flex-1 flex flex-col sm:block">
+      <div className="flex-1">
         <div className="h-12 w-full bg-primary sm:hidden flex justify-end">
           <button
             className="mr-4 text-2xl text-white"
