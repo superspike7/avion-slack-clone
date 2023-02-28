@@ -13,7 +13,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 function App() {
   return (
     <>
-      <ReactQueryDevtools />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
@@ -28,6 +27,7 @@ function App() {
           <Route path="register" element={<Register />} />
         </Route>
       </Routes>
+      <ReactQueryDevtools />
     </>
   );
 }
